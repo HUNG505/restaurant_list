@@ -40,9 +40,6 @@ const restaurantSchema = new Schema({
   description: {
     type: String,
     required: true
-  },
-  done: {
-    type: Boolean
   }
 })
 
