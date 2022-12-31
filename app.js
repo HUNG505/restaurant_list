@@ -8,6 +8,7 @@ const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 // 載入Body-parser
 const bodyParser = require('body-parser')
+const restaurant = require('./models/restaurant')
 
 
 // 使用express
@@ -133,6 +134,15 @@ app.post('/restaurants/:id/edit', (req, res) => {
       return restaurant.save()
     })
     .then(() => res.redirect(`/restaurants/${id}`))
+    .catch(error => console.log(error))
+})
+
+// delete路由設定
+app.post('/restaurants/:id/delete', (req, res) => {
+  const id = req.params.id
+  return Restaurant.findById(id)
+    .then(restaurant => restaurant.remove())
+    .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
 
