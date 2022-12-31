@@ -6,6 +6,8 @@ const mongoose = require('mongoose')
 const exphbs = require('express-handlebars')
 // 載入restaurant model
 const Restaurant = require('./models/restaurant')
+// 載入Body-parser
+const bodyParser = require('body-parser')
 
 
 // 使用express
@@ -31,14 +33,14 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 const db = mongoose.connection
 
 
-// 載入JOSN資料
+// 載入JSON資料
 // const restaurantList = require('./restaurant.json')
 
 
 // 設定靜態檔案的位置
 app.use(express.static('public'))
-// 使用body - parser
-// app.use(bodyParser.urlencoded({ extended: true }))
+// 使用body-parser
+app.use(bodyParser.urlencoded({ extended: true }))
 
 
 // <---設定路由--->
@@ -60,6 +62,29 @@ app.get('/', (req, res) => {
     .catch(error => console.log(error))
 })
 
+// 新餐廳路由
+// 不能放在show路由下面，為什麼，有無其他方法避免？
+app.get('/restaurants/new', (req, res) => {
+  return res.render('new')
+})
+
+// 將新增的資料存資料庫
+app.post('/restaurants', (req, res) => {
+  const name = req.body.name
+  const category = req.body.category
+  const rating = req.body.rating
+  const location = req.body.location
+  const google_map = req.body.google_map
+  const phone = req.body.phone
+  const description = req.body.description
+
+  return Restaurant.create({ name, category, rating, location, google_map, phone, description })
+    .then(res.redirect('/'))
+    .catch(error => console.log(error))
+})
+
+
+
 // show頁面路由設定
 app.get('/restaurants/:id', (req, res) => {
 
@@ -76,6 +101,7 @@ app.get('/restaurants/:id', (req, res) => {
     .catch(error => console.log(error))
 
 })
+
 
 // 搜尋頁面路由設定
 app.get('/search', (req, res) => {
@@ -107,6 +133,11 @@ app.get('/search', (req, res) => {
   // 完整寫法是res.render('index', { restaurants: restaurants, keyword: keyword })，但可透過ES6的物件擴展(object literal extension)縮寫成以下
   res.render('index', { restaurants, keyword })
 })
+
+
+
+
+
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)

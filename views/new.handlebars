@@ -1,0 +1,88 @@
+<header>
+  <!-- navigation -->
+  <nav class="navbar navbar-light bg-light">
+    <div class="container">
+      <a class="navbar-brand" href="/">
+        <img src="https://assets-lighthouse.s3.amazonaws.com/uploads/image/file/6227/restaurant-list-logo.png"
+          width="30" height="30" class="d-inline-block align-top" alt="好。吃">
+        我的餐廳清單
+      </a>
+    </div>
+  </nav>
+
+  <div class="banner"></div>
+</header>
+
+
+<h1 class="mb-1 restaurant-show-title">新增餐廳</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-md-10 mx-auto mb-3">
+
+      <form action="/restaurants" method="POST">
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-utensils pr-2"></i>
+            餐廳名稱：
+            <input type="text" name="name" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-utensils pr-2"></i>
+            類別：
+            <input type="text" name="category" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-star fa-xs"></i>
+            評價：
+            <input type="text" name="rating" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-map-marker-alt pr-2"></i>
+            地址：
+            <input type="text" name="location" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-location-arrow pr-2 fa-xs"></i>
+            Google map :
+            <input type="text" name="google_map" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-mobile-alt pr-2"></i>
+            電話：
+            <input type="text" name="phone" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            介紹文：
+            <input type="text" name="description" required="true">
+          </span>
+        </p>
+
+        <img class="rounded mx-auto d-block mb-4 w-100" src="{{ restaurant.image }}" alt="{{ restaurant.name }}"
+          style="max-width: 600px;">
+
+        <div class="d-flex justify-content-center">
+          <button type="submit" class="btn btn-major btn-lg mx-3">完成</button>
+          <a href="/" class="btn btn-secondary btn-lg mx-3">back</a>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

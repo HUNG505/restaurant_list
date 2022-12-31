@@ -70,7 +70,8 @@ header {
 }
 
 .badge {
-  color: #666666;
+  color: white;
+  background-color: #666666;
 }
 
 .restaurant-show-title {
