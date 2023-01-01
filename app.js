@@ -8,7 +8,6 @@ const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 // 載入Body-parser
 const bodyParser = require('body-parser')
-const restaurant = require('./models/restaurant')
 
 
 // 使用express
@@ -34,10 +33,6 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
 const db = mongoose.connection
 
 
-// 載入JSON資料
-// const restaurantList = require('./restaurant.json')
-
-
 // 設定靜態檔案的位置
 app.use(express.static('public'))
 // 使用body-parser
@@ -56,7 +51,6 @@ db.once('open', () => {
 
 // 主頁面路由設定
 app.get('/', (req, res) => {
-  // res.render('index', { restaurants: restaurantList.results })
   Restaurant.find()
     .lean()
     .then(restaurants => res.render('index', { restaurants }))
@@ -70,7 +64,8 @@ app.get('/restaurants/new', (req, res) => {
 })
 
 // 將新增的資料存資料庫
-// 都是以test輸入也沒問題？
+// 都是以text輸入也沒問題？
+// 為什麼不post/restaurants/new
 app.post('/restaurants', (req, res) => {
   const name = req.body.name
   const category = req.body.category
@@ -87,13 +82,6 @@ app.post('/restaurants', (req, res) => {
 
 // show頁面路由設定
 app.get('/restaurants/:id', (req, res) => {
-
-  // 用find找到被點擊的物件
-  // const restaurant = restaurantList.results.find(restaurant => restaurant.id.toString() === req.params.restaurants_id)
-
-  // 完整寫法是res.render('show', { restaurant: restaurant })，但可透過ES6的物件擴展(object literal extension)縮寫成以下
-  // res.render('show', { restaurant })
-
   const id = req.params.id
   return Restaurant.findById(id)
     .lean()
@@ -151,20 +139,11 @@ app.post('/restaurants/:id/delete', (req, res) => {
 app.get('/search', (req, res) => {
 
   const keyword = req.query.keyword
-  //   const restaurants = restaurantList.results.filter(restaurant => {
-  //     // 透過replace把字串中的空白格消除，透過toLowerCase把字母都變成小寫
-  //     // 若keyword包含在name裡面就回傳true，若keyword包含在category裡面就回傳true，這樣搜尋欄位會同時搜尋「餐廳名稱」和「餐廳類別」
-  //     if (restaurant.name.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
-  //       return true
-  //     } else if (restaurant.category.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
-  //       return true
-  //     }
-  // })
 
-  const restaurants = Restaurant.find()
+  return Restaurant.find()
     .lean()
-    .then(restaurantData => {
-      restaurantData.filter(restaurant => {
+    .then(restaurants => {
+      return restaurants.filter(restaurant => {
         if (restaurant.name.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
           return true
         } else if (restaurant.category.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
@@ -172,16 +151,8 @@ app.get('/search', (req, res) => {
         }
       })
     })
-
-
-  // 完整寫法是res.render('index', { restaurants: restaurants, keyword: keyword })，但可透過ES6的物件擴展(object literal extension)縮寫成以下
-  res.render('index', { restaurants, keyword })
+    .then((restaurants, keyword) => res.render('index', { restaurants, keyword }))
 })
-
-
-
-
-
 
 app.listen(port, () => {
   console.log(`Express is listening on localhost:${port}`)
