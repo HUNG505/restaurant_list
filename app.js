@@ -8,6 +8,8 @@ const exphbs = require('express-handlebars')
 const Restaurant = require('./models/restaurant')
 // 載入Body-parser
 const bodyParser = require('body-parser')
+// 載入method-override
+const methodOverride = require('method-override')
 
 
 // 使用express
@@ -37,6 +39,8 @@ const db = mongoose.connection
 app.use(express.static('public'))
 // 使用body-parser
 app.use(bodyParser.urlencoded({ extended: true }))
+// 使用method-override
+app.use(methodOverride('_method'))
 
 
 // <---設定路由--->
@@ -100,7 +104,7 @@ app.get('/restaurants/:id/edit', (req, res) => {
 })
 
 // 控制edit後的路由
-app.post('/restaurants/:id/edit', (req, res) => {
+app.put('/restaurants/:id', (req, res) => {
   const id = req.params.id
   const name = req.body.name
   const category = req.body.category
@@ -126,7 +130,7 @@ app.post('/restaurants/:id/edit', (req, res) => {
 })
 
 // delete路由設定
-app.post('/restaurants/:id/delete', (req, res) => {
+app.delete('/restaurants/:id', (req, res) => {
   const id = req.params.id
   return Restaurant.findById(id)
     .then(restaurant => restaurant.remove())
