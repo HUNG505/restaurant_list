@@ -20,11 +20,20 @@
     <div class="col-12 col-md-10 mx-auto mb-3">
 
       <form action="/restaurants" method="POST">
-        <p class="mb-1">
+
+        <div class="input-group mb-1">
           <span class="text-secondary">
             <i class="fas fa-utensils pr-2"></i>
             餐廳名稱：
-            <input type="text" name="name" required="true">
+            <input type="text" name="name" required="true" placeholder="梅子鰻蒲燒專賣店">
+          </span>
+        </div>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <i class="fas fa-utensils pr-2"></i>
+            英文名稱：
+            <input type="text" name="name_en" required="true" placeholder="Umeko Japanese Unagi House">
           </span>
         </p>
 
@@ -32,7 +41,7 @@
           <span class="text-secondary">
             <i class="fas fa-utensils pr-2"></i>
             類別：
-            <input type="text" name="category" required="true">
+            <input type="text" name="category" required="true" placeholder="日本料理">
           </span>
         </p>
 
@@ -40,7 +49,7 @@
           <span class="text-secondary">
             <i class="fas fa-star fa-xs"></i>
             評價：
-            <input type="text" name="rating" required="true">
+            <input type="number" step="0.1" min="0" max="5" name="rating" required="true" placeholder="3.5">
           </span>
         </p>
 
@@ -48,7 +57,7 @@
           <span class="text-secondary">
             <i class="fas fa-map-marker-alt pr-2"></i>
             地址：
-            <input type="text" name="location" required="true">
+            <input type="text" name="location" required="true" placeholder="台北市中山區林森北路107巷8號">
           </span>
         </p>
 
@@ -56,7 +65,7 @@
           <span class="text-secondary">
             <i class="fas fa-location-arrow pr-2 fa-xs"></i>
             Google map :
-            <input type="text" name="google_map" required="true">
+            <input type="url" name="google_map" required="true">
           </span>
         </p>
 
@@ -64,14 +73,22 @@
           <span class="text-secondary">
             <i class="fas fa-mobile-alt pr-2"></i>
             電話：
-            <input type="text" name="phone" required="true">
+            <input type="tel" name="phone" required="true" placeholder="02-25212813">
           </span>
         </p>
 
         <p class="mb-1">
           <span class="text-secondary">
-            介紹文：
-            <input type="text" name="description" required="true">
+            <i class="fa-regular fa-image pr-2"></i>
+            圖片連結：
+            <input type="url" name="image" required="true">
+          </span>
+        </p>
+
+        <p class="mb-1">
+          <span class="text-secondary">
+            <label for="floatingTextarea2">介紹文：</label>
+            <textarea class="form-control" name="description" required="true"></textarea>
           </span>
         </p>
 

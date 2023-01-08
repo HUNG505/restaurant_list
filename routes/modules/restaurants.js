@@ -19,8 +19,11 @@ router.post('/', (req, res) => {
   const googleMap = req.body.google_map
   const phone = req.body.phone
   const description = req.body.description
+  const name_en = req.body.name_en
+  const google_map = req.body.google_map
+  const image = req.body.image
 
-  return Restaurant.create({ name, category, rating, location, googleMap, phone, description })
+  return Restaurant.create({ name, category, rating, location, googleMap, phone, description, name_en, google_map, image })
     .then(res.redirect('/'))
     .catch(error => console.log(error))
 })
