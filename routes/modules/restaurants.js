@@ -3,14 +3,11 @@ const router = express.Router()
 const Restaurant = require('../../models/restaurant')
 
 // 新餐廳路由
-// 不能放在show路由下面，為什麼，有無其他方法避免？
 router.get('/new', (req, res) => {
   return res.render('new')
 })
 
 // 將新增的資料存資料庫
-// 都是以text輸入也沒問題？
-// 為什麼不post/restaurants/new
 router.post('/', (req, res) => {
   const name = req.body.name
   const category = req.body.category
@@ -80,5 +77,6 @@ router.delete('/:id', (req, res) => {
     .then(() => res.redirect('/'))
     .catch(error => console.log(error))
 })
+
 
 module.exports = router
