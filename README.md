@@ -1,6 +1,6 @@
 # 餐廳清單
 這個專案使用Node.js + express來製作，使用者可以在從清單中快速瀏覽並搜尋餐廳的資訊，也可以透過點擊來看更多的餐廳資訊
-
+![image](https://github.com/HUNG505/restaurant_list/blob/main/image/A8.png)
 
 ## 產品功能
 1. 使用者可以在首頁看到所有的餐廳照片及簡易資訊
