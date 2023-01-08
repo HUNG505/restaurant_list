@@ -20,6 +20,13 @@
     "mongoose": "^5.9.7"
   },
   "devDependencies": {
-    "dotenv": "^16.0.3"
+    "dotenv": "^16.0.3",
+    "standard": "^17.0.0"
+  },
+  "standard": {
+    "ignore": [
+      "popper.js",
+      "bootstrap.js"
+    ]
   }
 }

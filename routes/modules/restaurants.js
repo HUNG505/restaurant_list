@@ -16,11 +16,11 @@ router.post('/', (req, res) => {
   const category = req.body.category
   const rating = req.body.rating
   const location = req.body.location
-  const google_map = req.body.google_map
+  const googleMap = req.body.google_map
   const phone = req.body.phone
   const description = req.body.description
 
-  return Restaurant.create({ name, category, rating, location, google_map, phone, description })
+  return Restaurant.create({ name, category, rating, location, googleMap, phone, description })
     .then(res.redirect('/'))
     .catch(error => console.log(error))
 })
@@ -32,7 +32,6 @@ router.get('/:id', (req, res) => {
     .lean()
     .then(restaurant => res.render('show', { restaurant }))
     .catch(error => console.log(error))
-
 })
 
 // edit頁面路由設定
@@ -51,7 +50,7 @@ router.put('/:id', (req, res) => {
   const category = req.body.category
   const rating = req.body.rating
   const location = req.body.location
-  const google_map = req.body.google_map
+  const googleMap = req.body.google_map
   const phone = req.body.phone
   const description = req.body.description
 
@@ -61,7 +60,7 @@ router.put('/:id', (req, res) => {
       restaurant.category = category
       restaurant.rating = rating
       restaurant.location = location
-      restaurant.google_map = google_map
+      restaurant.google_map = googleMap
       restaurant.phone = phone
       restaurant.description = description
       return restaurant.save()

@@ -5,7 +5,6 @@ require('../../config/mongoose')
 const db = require('../../config/mongoose')
 
 db.once('open', () => {
-
   Restaurant.create(restaurantSeeders)
     .then(() => {
       console.log('Seed data is done!')

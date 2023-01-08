@@ -4,13 +4,12 @@ const Restaurant = require('../../models/restaurant')
 
 // 搜尋頁面路由設定
 router.get('/search', (req, res) => {
-
   const keyword = req.query.keyword
 
   return Restaurant.find()
     .lean()
     .then(restaurants => {
-      return restaurants.filter(restaurant => {
+      return restaurants.filter(restaurant => {  // eslint-disable-line
         if (restaurant.name.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
           return true
         } else if (restaurant.category.toLowerCase().replace(/ /g, '').includes(keyword.toLowerCase().replace(/ /g, ''))) {
